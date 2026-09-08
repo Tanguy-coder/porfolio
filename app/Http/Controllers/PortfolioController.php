@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessage;
 use App\Models\AboutValue;
 use App\Models\Certification;
 use App\Models\ContactInfo;
@@ -10,6 +11,7 @@ use App\Models\Project;
 use App\Models\SiteSetting;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PortfolioController extends Controller
 {
@@ -165,6 +167,13 @@ class PortfolioController extends Controller
             'subject' => 'nullable|string|max:255',
             'message' => 'required|string|max:5000',
         ]);
+
+        Mail::to('contact@tanguy-dev.com')->send(new ContactMessage(
+            senderName: $validated['name'],
+            senderEmail: $validated['email'],
+            mailSubject: $validated['subject'],
+            body: $validated['message'],
+        ));
 
         return back()->with('success', 'Message envoyé avec succès !');
     }
