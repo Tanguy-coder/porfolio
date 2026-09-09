@@ -944,23 +944,23 @@ footer {
       </div>
       <div class="hero-stats">
         <div class="stat">
-          <div class="stat-num" id="stat-num-1">{{ $settings['stat_num_exp'] ?? '2+' }}</div>
+          <div class="stat-num" id="stat-num-1">{{ $settings['stat_exp_value'] ?? '2+' }}</div>
           <div class="stat-label">{{ $settings['stat_exp'] ?? "ANS D'EXP." }}</div>
         </div>
         <div class="stat">
-          <div class="stat-num" id="stat-num-2">{{ $settings['stat_num_projects'] ?? $projects->count() }}</div>
+          <div class="stat-num" id="stat-num-2">{{ $settings['stat_projects_value'] ?? $projects->count() }}</div>
           <div class="stat-label">{{ $settings['stat_projects'] ?? 'PROJETS' }}</div>
         </div>
         <div class="stat">
-          <div class="stat-num" id="stat-num-3">{{ $settings['stat_num_pro_exp'] ?? $experiences->count() }}</div>
+          <div class="stat-num" id="stat-num-3">{{ $settings['stat_pro_exp_value'] ?? $experiences->count() }}</div>
           <div class="stat-label">{{ $settings['stat_pro_exp'] ?? 'EXP. PRO.' }}</div>
         </div>
         <div class="stat">
-          <div class="stat-num" id="stat-num-4">{{ $settings['stat_num_certs'] ?? $certifications->count() }}</div>
+          <div class="stat-num" id="stat-num-4">{{ $settings['stat_certs_value'] ?? $certifications->count() }}</div>
           <div class="stat-label">{{ $settings['stat_certs'] ?? 'CERTIFS' }}</div>
         </div>
         <div class="stat">
-          <div class="stat-num" id="stat-num-5">{{ $settings['stat_num_techs'] ?? $skills->count() . '+' }}</div>
+          <div class="stat-num" id="stat-num-5">{{ $settings['stat_techs_value'] ?? $skills->count() . '+' }}</div>
           <div class="stat-label">{{ $settings['stat_techs'] ?? 'TECHNOS' }}</div>
         </div>
       </div>

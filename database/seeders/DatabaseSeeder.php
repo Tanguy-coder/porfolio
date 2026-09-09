@@ -77,11 +77,11 @@ class DatabaseSeeder extends Seeder
             'btn_send' => 'Envoyer le message', 'btn_send_en' => 'Send message',
 
             // Stat values
-            'stat_num_exp' => '2+',
-            'stat_num_projects' => '14',
-            'stat_num_pro_exp' => '2',
-            'stat_num_certs' => '6',
-            'stat_num_techs' => '15+',
+            'stat_exp_value' => '2+',
+            'stat_projects_value' => '14',
+            'stat_pro_exp_value' => '2',
+            'stat_certs_value' => '6',
+            'stat_techs_value' => '15+',
 
             // Stat labels
             'stat_exp' => "ANS D'EXP.", 'stat_exp_en' => 'YRS EXP.',
