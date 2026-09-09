@@ -15,6 +15,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PortfolioController::class, 'index'])->name('portfolio');
 Route::post('/contact', [PortfolioController::class, 'contact'])->name('contact.send');
 
+Route::get('/sitemap.xml', function () {
+    $content = '<?xml version="1.0" encoding="UTF-8"?>';
+    $content .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    $content .= '<url>';
+    $content .= '<loc>' . url('/') . '</loc>';
+    $content .= '<lastmod>' . now()->toW3cString() . '</lastmod>';
+    $content .= '<changefreq>weekly</changefreq>';
+    $content .= '<priority>1.0</priority>';
+    $content .= '</url>';
+    $content .= '</urlset>';
+    return response($content, 200, ['Content-Type' => 'application/xml']);
+})->name('sitemap');
+
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');

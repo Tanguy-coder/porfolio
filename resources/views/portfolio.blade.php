@@ -4,17 +4,77 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<meta name="description" content="Portfolio de {{ $settings['hero_name'] ?? 'Manoela Hardy Rakotonarivo' }} — {{ $settings['hero_role'] ?? 'Développeur Full-Stack' }}">
-<meta name="keywords" content="développeur full-stack, Angular, NestJS, Madagascar, Antananarivo, CQRS, DDD, NX Monorepo">
-<meta name="author" content="{{ $settings['hero_name'] ?? 'Manoela Hardy Rakotonarivo' }}">
-<meta property="og:title" content="{{ $settings['hero_name'] ?? 'Manoela Hardy' }} — {{ $settings['hero_role'] ?? 'Développeur Full-Stack' }}">
-<meta property="og:description" content="{{ $settings['hero_role'] ?? 'Développeur Full-Stack' }} basé à Antananarivo, Madagascar. Ouvert aux opportunités.">
+@php
+  $seoName = $settings['hero_name'] ?? 'MAMBAFEI Tanguy Pouwedeou';
+  $seoRole = $settings['hero_role'] ?? 'Ingénieur Logiciel Fullstack';
+  $seoDesc = "Portfolio de {$seoName} — {$seoRole}. Laravel, Spring Boot, React Native. Ouvert aux opportunités.";
+  $seoUrl = url('/');
+  $seoPhoto = ($settings['hero_photo'] ?? '') ? asset('storage/' . $settings['hero_photo']) : asset('images/profile.jpg');
+@endphp
+<title>{{ $seoName }} — {{ $seoRole }}</title>
+<meta name="description" content="{{ $seoDesc }}">
+<meta name="keywords" content="développeur fullstack, ingénieur logiciel, Laravel, Spring Boot, React Native, PHP, Java, freelance, Lomé, Togo, portfolio">
+<meta name="author" content="{{ $seoName }}">
+<meta name="theme-color" content="#0a0e1a">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ $seoUrl }}">
+<link rel="alternate" hreflang="fr" href="{{ $seoUrl }}">
+<link rel="alternate" hreflang="en" href="{{ $seoUrl }}">
+<link rel="alternate" hreflang="x-default" href="{{ $seoUrl }}">
+<meta property="og:title" content="{{ $seoName }} — {{ $seoRole }}">
+<meta property="og:description" content="{{ $seoDesc }}">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{ $settings['hero_name'] ?? 'Manoela Hardy' }} — {{ $settings['hero_role'] ?? 'Développeur Full-Stack' }}">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%231a1a2e'/><text y='72' x='50' text-anchor='middle' font-size='55' font-family='Arial' font-weight='bold' fill='%2300d4ff'>MH</text></svg>">
-<title>{{ $settings['hero_name'] ?? 'Manoela Hardy' }} — {{ $settings['hero_role'] ?? 'Développeur Full-Stack' }}</title>
+<meta property="og:url" content="{{ $seoUrl }}">
+<meta property="og:image" content="{{ $seoPhoto }}">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="TANGUYDEV">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $seoName }} — {{ $seoRole }}">
+<meta name="twitter:description" content="{{ $seoDesc }}">
+<meta name="twitter:image" content="{{ $seoPhoto }}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%231a1a2e'/><text y='72' x='50' text-anchor='middle' font-size='55' font-family='Arial' font-weight='bold' fill='%2300d4ff'>TM</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "TANGUYDEV",
+      "url": "{{ $seoUrl }}",
+      "description": "{{ $seoDesc }}",
+      "inLanguage": ["fr", "en"]
+    },
+    {
+      "@type": "Person",
+      "name": "{{ $seoName }}",
+      "url": "{{ $seoUrl }}",
+      "image": "{{ $seoPhoto }}",
+      "jobTitle": "{{ $seoRole }}",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "ITVOG"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lomé",
+        "addressCountry": "TG"
+      },
+      "knowsAbout": ["Laravel", "Spring Boot", "React Native", "PHP", "Java", "REST API", "Microservices", "DDD"],
+      "sameAs": [
+        @if($contactInfos->where('link', '!=', null)->count() > 0)
+          @foreach($contactInfos->filter(fn($ci) => $ci->link && str_starts_with($ci->link, 'http')) as $ci)
+            "{{ $ci->link }}"@if(!$loop->last),@endif
+          @endforeach
+        @endif
+      ]
+    }
+  ]
+}
+</script>
 <style>
 :root {
   --bg: #0a0e1a;
@@ -461,6 +521,7 @@ section {
 .project-name {
   font-family: 'Syne', sans-serif;
   font-size: 18px;
+  margin: 0;
   font-weight: 700;
   color: var(--text);
 }
@@ -538,6 +599,7 @@ section {
 .timeline-title {
   font-family: 'Syne', sans-serif;
   font-size: 19px;
+  margin: 0;
   font-weight: 700;
   color: var(--text);
 }
@@ -618,6 +680,7 @@ section {
 .cert-name {
   font-family: 'Syne', sans-serif;
   font-size: 15px;
+  margin: 0;
   font-weight: 700;
   color: var(--text);
 }
@@ -835,7 +898,7 @@ footer {
 
 <!-- ── NAVBAR ── -->
 <nav>
-  <div class="nav-logo">MH<span style="color:var(--text2);">.</span></div>
+  <div class="nav-logo">TANGUYDEV<span style="color:var(--text2);">.</span></div>
   <ul class="nav-links">
     <li><a href="#hero" id="nav-home">Accueil</a></li>
     <li><a href="#about" id="nav-about">À propos</a></li>
@@ -857,7 +920,8 @@ footer {
 </nav>
 
 <!-- ── HERO ── -->
-<div id="hero">
+<main>
+<section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid">
     <div>
@@ -902,10 +966,10 @@ footer {
       </div>
     </div>
     <div class="hero-photo-wrap">
-      <img src="{{ ($settings['hero_photo'] ?? '') ? asset('storage/' . $settings['hero_photo']) : asset('images/profile.jpg') }}" alt="{{ $settings['hero_name'] ?? 'Photo' }}" class="hero-photo">
+      <img src="{{ ($settings['hero_photo'] ?? '') ? asset('storage/' . $settings['hero_photo']) : asset('images/profile.jpg') }}" alt="Photo de {{ $settings['hero_name'] ?? 'MAMBAFEI Tanguy' }}, {{ $settings['hero_role'] ?? 'Ingénieur Logiciel Fullstack' }}" class="hero-photo">
     </div>
   </div>
-</div>
+</section>
 
 <!-- ── ABOUT ── -->
 <section id="about" class="about-section" style="background:var(--bg2); max-width:100%; padding: 100px 80px;">
@@ -947,7 +1011,7 @@ footer {
     @foreach($experiences as $exp)
     <div class="timeline-item reveal">
       <div class="timeline-header">
-        <div class="timeline-title" id="exp-{{ $loop->iteration }}-title">{{ $exp->title }}</div>
+        <h3 class="timeline-title" id="exp-{{ $loop->iteration }}-title">{{ $exp->title }}</h3>
         <div class="timeline-date" id="exp-{{ $loop->iteration }}-date">{{ $exp->date_range }}</div>
       </div>
       <div class="timeline-company" id="exp-{{ $loop->iteration }}-company">{{ $exp->company }}{{ $exp->location ? ' · ' . $exp->location : '' }}</div>
@@ -984,7 +1048,7 @@ footer {
             <div class="project-icon" style="background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.3);">{{ $project->icon }}</div>
             <div>
               <div style="display:flex;align-items:center;gap:8px;">
-                <div class="project-name" id="project-{{ $loop->iteration }}-name">{{ $project->title }}</div>
+                <h3 class="project-name" id="project-{{ $loop->iteration }}-name">{{ $project->title }}</h3>
                 <span id="project-{{ $loop->iteration }}-type" style="font-size:10px;background:rgba(255,107,53,0.15);color:var(--accent);border:1px solid rgba(255,107,53,0.3);padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;">{{ $project->type }}</span>
               </div>
               @if($project->client)
@@ -995,7 +1059,7 @@ footer {
         </div>
         @else
         <div class="project-icon">{{ $project->icon }}</div>
-        <div class="project-name" id="project-{{ $loop->iteration }}-name">{{ $project->title }}</div>
+        <h3 class="project-name" id="project-{{ $loop->iteration }}-name">{{ $project->title }}</h3>
         @endif
         <p class="project-desc" id="project-{{ $loop->iteration }}-desc">{{ $project->description }}</p>
         <div class="project-tags">
@@ -1035,7 +1099,7 @@ footer {
       @foreach($certifications as $cert)
       <div class="cert-card reveal">
         <div class="cert-badge">{{ $cert->icon }}</div>
-        <div class="cert-name" id="cert-{{ $loop->iteration }}-name">{{ $cert->title }}</div>
+        <h3 class="cert-name" id="cert-{{ $loop->iteration }}-name">{{ $cert->title }}</h3>
         <div class="cert-org" id="cert-{{ $loop->iteration }}-org">{{ $cert->issuer }}</div>
         <div class="cert-date" id="cert-{{ $loop->iteration }}-date">{{ $cert->date ?? '—' }}</div>
         @if($cert->verification_link)
@@ -1048,7 +1112,7 @@ footer {
 </section>
 
 <!-- ── CONTACT ── -->
-<div id="contact">
+<section id="contact">
   <div class="contact-inner">
     <div>
       <p class="section-label" id="contact-label">// contact</p>
@@ -1072,19 +1136,19 @@ footer {
     <form class="contact-form reveal" id="contactForm">
       @csrf
       <div class="form-group">
-        <label class="form-label" id="form-name">NOM</label>
-        <input type="text" name="name" class="form-input" placeholder="Votre nom" required>
+        <label class="form-label" id="form-name" for="field-name">NOM</label>
+        <input type="text" name="name" id="field-name" class="form-input" placeholder="Votre nom" required>
       </div>
       <div class="form-group">
-        <label class="form-label" id="form-email-label">EMAIL</label>
-        <input type="email" name="email" class="form-input" placeholder="votre@email.com" required>
+        <label class="form-label" id="form-email-label" for="field-email">EMAIL</label>
+        <input type="email" name="email" id="field-email" class="form-input" placeholder="votre@email.com" required>
       </div>
       <div class="form-group">
-        <label class="form-label" id="form-subject-label">SUJET</label>
+        <label class="form-label" id="form-subject-label" for="form-subject-input">SUJET</label>
         <input type="text" name="subject" class="form-input" id="form-subject-input" placeholder="Opportunité / Projet / Collaboration">
       </div>
       <div class="form-group">
-        <label class="form-label" id="form-message-label">MESSAGE</label>
+        <label class="form-label" id="form-message-label" for="form-message-input">MESSAGE</label>
         <textarea name="message" class="form-textarea" id="form-message-input" placeholder="Décrivez votre projet ou opportunité..." required></textarea>
       </div>
       <button type="submit" class="form-submit" id="form-send-btn">
@@ -1093,11 +1157,12 @@ footer {
       <div id="formMsg" style="display:none;font-size:13px;color:var(--teal);margin-top:8px;font-family:'JetBrains Mono',monospace;"></div>
     </form>
   </div>
-</div>
+</section>
+</main>
 
 <!-- ── FOOTER ── -->
 <footer>
-  <span style="color:var(--teal)">MH</span> · {{ $settings['hero_name'] ?? 'Manoela Hardy Rakotonarivo' }} · <span id="footer-text">{{ $settings['footer_text'] ?? 'Construit avec passion depuis Antananarivo 🇲🇬' }}</span>
+  <span style="color:var(--teal)">TANGUYDEV</span> · {{ $settings['hero_name'] ?? 'MAMBAFEI Tanguy Pouwedeou' }} · <span id="footer-text">{{ $settings['footer_text'] ?? 'Construit avec passion depuis Lome' }}</span>
 </footer>
 
 <script>
