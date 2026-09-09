@@ -76,10 +76,17 @@ class DatabaseSeeder extends Seeder
             'btn_cv' => '⬇ Télécharger CV', 'btn_cv_en' => '⬇ Download CV',
             'btn_send' => 'Envoyer le message', 'btn_send_en' => 'Send message',
 
+            // Stat values
+            'stat_num_exp' => '2+',
+            'stat_num_projects' => '14',
+            'stat_num_pro_exp' => '2',
+            'stat_num_certs' => '6',
+            'stat_num_techs' => '15+',
+
             // Stat labels
             'stat_exp' => "ANS D'EXP.", 'stat_exp_en' => 'YRS EXP.',
             'stat_projects' => 'PROJETS', 'stat_projects_en' => 'PROJECTS',
-            'stat_pro_exp' => 'EXPÉRIENCE PROFESSIONNELLE MAJEURE', 'stat_pro_exp_en' => 'MAJOR PROFESSIONAL EXPERIENCE',
+            'stat_pro_exp' => 'EXP. PRO.', 'stat_pro_exp_en' => 'PRO. EXP.',
             'stat_certs' => 'CERTIFS', 'stat_certs_en' => 'CERTS',
             'stat_techs' => 'TECHNOS', 'stat_techs_en' => 'TECHS',
 

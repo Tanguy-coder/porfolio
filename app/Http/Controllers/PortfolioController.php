@@ -175,6 +175,6 @@ class PortfolioController extends Controller
             body: $validated['message'],
         ));
 
-        return back()->with('success', 'Message envoyé avec succès !');
+        return response()->json(['success' => true]);
     }
 }

@@ -944,24 +944,24 @@ footer {
       </div>
       <div class="hero-stats">
         <div class="stat">
-          <div class="stat-num">{{ $experiences->count() > 0 ? $experiences->first()->date_range : '2' }}</div>
-          <div class="stat-label">ANS D'EXP.</div>
+          <div class="stat-num" id="stat-num-1">{{ $settings['stat_num_exp'] ?? '2+' }}</div>
+          <div class="stat-label">{{ $settings['stat_exp'] ?? "ANS D'EXP." }}</div>
         </div>
         <div class="stat">
-          <div class="stat-num">{{ $projects->where('type', 'PERSONNEL')->count() }}</div>
-          <div class="stat-label">PROJETS</div>
+          <div class="stat-num" id="stat-num-2">{{ $settings['stat_num_projects'] ?? $projects->count() }}</div>
+          <div class="stat-label">{{ $settings['stat_projects'] ?? 'PROJETS' }}</div>
         </div>
         <div class="stat">
-          <div class="stat-num">{{ $experiences->count() }}</div>
-          <div class="stat-label">EXPÉRIENCE PROFESSIONNELLE MAJEURE</div>
+          <div class="stat-num" id="stat-num-3">{{ $settings['stat_num_pro_exp'] ?? $experiences->count() }}</div>
+          <div class="stat-label">{{ $settings['stat_pro_exp'] ?? 'EXP. PRO.' }}</div>
         </div>
         <div class="stat">
-          <div class="stat-num">{{ $certifications->count() }}</div>
-          <div class="stat-label">CERTIFS</div>
+          <div class="stat-num" id="stat-num-4">{{ $settings['stat_num_certs'] ?? $certifications->count() }}</div>
+          <div class="stat-label">{{ $settings['stat_certs'] ?? 'CERTIFS' }}</div>
         </div>
         <div class="stat">
-          <div class="stat-num">{{ $skills->count() }}+</div>
-          <div class="stat-label">TECHNOS</div>
+          <div class="stat-num" id="stat-num-5">{{ $settings['stat_num_techs'] ?? $skills->count() . '+' }}</div>
+          <div class="stat-label">{{ $settings['stat_techs'] ?? 'TECHNOS' }}</div>
         </div>
       </div>
     </div>
