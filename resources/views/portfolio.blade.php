@@ -898,7 +898,7 @@ footer {
 
 <!-- ── NAVBAR ── -->
 <nav>
-  <div class="nav-logo">MT<span style="color:var(--text2);">.</span></div>
+  <div class="nav-logo">TM<span style="color:var(--text2);">.</span></div>
   <ul class="nav-links">
     <li><a href="#hero" id="nav-home">Accueil</a></li>
     <li><a href="#about" id="nav-about">À propos</a></li>
