@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PortfolioController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PortfolioController::class, 'index'])->name('portfolio');
@@ -31,6 +32,17 @@ Route::get('/sitemap.xml', function () {
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::middleware('auth')->prefix('setup')->group(function () {
+    Route::get('/storage-link', function () {
+        Artisan::call('storage:link');
+        return '<pre>' . Artisan::output() . '</pre>';
+    });
+    Route::get('/migrate', function () {
+        Artisan::call('migrate', ['--force' => true]);
+        return '<pre>' . Artisan::output() . '</pre>';
+    });
+});
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
